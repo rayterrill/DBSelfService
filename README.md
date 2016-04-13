@@ -2,6 +2,7 @@
 This project provides a web-based front end using CakePHP for self-service creation and deletion of SQL Server databases as a DevOps proof-of-concept.
 
 This project is basically broken into three parts:
+
 1. A CakePHP Web front-end, that allows users to request new databases be created and older databases be deleted
 2. A PowerShell script that actually implements the requested work
 3. A Database and tables that hold information about the databases and operations requested
@@ -9,6 +10,7 @@ This project is basically broken into three parts:
 The database contains a table dbfifoqueue that serves as a "poor-man's queue" - requests are added to the table and picked off in order by a PowerShell script running as a Windows scheduled task. This decouples the operations performing the work, which can take a significant amount of time in some cases, from the web-based GUI. This is very similar to the queue-based load leveling design pattern.
 
 The basic DB creation workflow is as follows:
+
 1. A user navigates to the web page, and clicks the Create a New Database button
 2. The user enters the required data (Database Name, and Purpose). For simplicity's sake, the database server is currently hard-coded
 3. The user clicks Create Database, which inserts two rows into the database - one for our database table, and one into a queue table used by our PowerShell script
@@ -18,10 +20,12 @@ The basic DB creation workflow is as follows:
 The DB deletion workflow works almost exactly the same, except the PowerShell script deletes the database.
 
 ### Requirements
+
 1. A server running SQL Server
 2. A server running IIS with Windows Authentication, URL Rewrite, and PHP 5.6+
 
 ### Implementing
+
 1. Download the code, and extract into your web server's webroot
 2. Make sure the tmp and logs folders are writable by your IIS process identity
 3. Create the database and tables by running the createDatabase.sql script
